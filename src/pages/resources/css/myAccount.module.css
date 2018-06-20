@@ -1,0 +1,55 @@
+.item{
+  float: left;
+  width: 100%;
+  padding: 3px;
+}
+
+.item .title{
+  float: left;
+  color: grey;
+  width: 150px;
+  padding: 5px;
+}
+
+.item .data{
+  float: left;
+  width: 482px;
+  padding: 5px;
+}
+
+.item table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.item tbody #title{
+  color: grey;
+}
+
+.item td, th{
+  padding: 5px;
+  border: 1px solid black;
+  width: 25%;
+  font-size: 10pt;
+}
+
+.button{
+  text-align: right;
+  width: 100%;
+}
+
+.button input{
+  text-align: center;
+  font-weight: bold;
+  width: 140px;
+  height: 30px;
+  color: #FFFFFF;
+  background-color: #00334D;
+}
+
+.button input:hover{
+  cursor: pointer;
+  color: #00334D;
+  background-color: #F78F1E;
+}

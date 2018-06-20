@@ -1,0 +1,28 @@
+.column{
+  float: left;
+  width: 326px;
+}
+
+.item{
+  float: left;
+  width: 100%;
+  padding: 3px;
+}
+
+.title{
+  float: left;
+  width: 100px;
+  padding: 5px;
+}
+
+.input{
+  float: left;
+  padding-bottom: 5px;
+}
+
+.check{
+  float: left;
+  width: 652px;
+  height: 27px;
+  padding: 3px;
+}
