@@ -1,10 +1,10 @@
 import React from 'react';
-import S from '../resources/css/addCustomer.module.css';
+import S from './index.module.css';
 import InputMask from 'react-input-mask';
-import StateSelect from '../resources/utilityComponents/stateSelect';
-import F from './functions';
+import StateSelect from '../../resources/utilityComponents/stateSelect';
+import F from '../functions';
 var data = {
-  dataID: "primary",
+  dataID: "billing",
   firstName: {value: "", border: ""},
   lastName: {value: "", border: ""},
   affiliation: {value: "", border: ""},
@@ -20,7 +20,15 @@ var data = {
   zip: {value: "", border: ""}
 };
 
-export default class PrimaryContactPanel extends React.Component{
+export default class BillingContactPanel extends React.Component{
+  /**Default Constructor*/
+  constructor(){
+    super();
+    this.state = {
+      isDisabled: false
+    };
+  }
+
   /**updateData Function*/
   updateData = (event) => {
     //Declaring fields
@@ -30,19 +38,19 @@ export default class PrimaryContactPanel extends React.Component{
     var checkObj = {dataObj: data, data: this.props.data, target: "", props: properties, val: event.target.value};
 
     //Checking field
-    if(field === "txtP_First"){
+    if(field === "txtB_First"){
       //Setting target
       checkObj.target = "firstName";
-    }else if(field === "txtP_Last"){
+    }else if(field === "txtB_Last"){
       //Setting target
       checkObj.target = "lastName";
-    }else if(field === "txtP_Affiliation"){
+    }else if(field === "txtB_Affiliation"){
       //Setting target
       checkObj.target = "affiliation";
-    }else if(field === "txtP_Email"){
+    }else if(field === "txtB_Email"){
       //Setting target
       checkObj.target = "email";
-    }else if(field === "txtP_Phone"){
+    }else if(field === "txtB_Phone"){
       //Parsing string
       var phone = val.replace(/[\s+-]/g,'');
 
@@ -53,20 +61,20 @@ export default class PrimaryContactPanel extends React.Component{
 
       //Setting target
       checkObj.target = "phone";
-    }else if(field === "txtP_Mobile"){
+    }else if(field === "txtB_Mobile"){
       //Parsing string
       var mobile = val.replace(/[\s+-]/g,'');
 
       //Setting data
       data.mobile = mobile;
       data.mobileMask = val;
-    }else if(field === "txtP_Address1"){
+    }else if(field === "txtB_Address1"){
       //Setting target
       checkObj.target = "address1";
-    }else if(field === "txtP_Address2"){
+    }else if(field === "txtB_Address2"){
       //Setting data
       data.address2 = val;
-    }else if(field === "txtP_City"){
+    }else if(field === "txtB_City"){
       //Setting target
       checkObj.target = "city";
     }else if(field === "selState"){
@@ -78,7 +86,7 @@ export default class PrimaryContactPanel extends React.Component{
     }
 
     //Checking field
-    if(field !== "txtP_Mobile" && field !== "txtP_Address2"){
+    if(field !== "txtB_Mobile" && field !== "txtB_Address2"){
       //Calling checkField function
       data = F.checkField(checkObj);
     }
@@ -87,11 +95,37 @@ export default class PrimaryContactPanel extends React.Component{
     this.props.getData(data);
   }
 
+  /**updateCheck Function*/
+  updateCheck = (event) => {
+    //Checking checkbox
+    if(event.target.checked === true){
+      //Updating data
+      this.props.billingSame(true);
+
+      //Setting state
+      this.setState({isDisabled: true});
+    }else{
+      //Updating data
+      this.props.billingSame(false);
+
+      //Setting state
+      this.setState({isDisabled: false});
+    }
+  }
+
+  test = () => {
+    //console.log(this.props.data);
+  }
+
   /**Rendering Webpage*/
   render(){
     return(
       <fieldset>
-        <legend> Primary Contact</legend>
+        {this.test()}
+        <legend> Billing Contact</legend>
+        <div className = {S.check}>
+          <input type = "checkbox" onChange = {this.updateCheck}/> Billing same as primary
+        </div>
         <div className = {S.column}>
           <div className = {S.item}>
             <div className = {S.title}>
@@ -101,7 +135,8 @@ export default class PrimaryContactPanel extends React.Component{
               <input type = "text"
                 value = {this.props.data.firstName.value}
                 className = {this.props.data.firstName.border}
-                id = "txtP_First"
+                disabled = {this.state.isDisabled}
+                id = "txtB_First"
                 onChange = {this.updateData}/>
             </div>
           </div>
@@ -113,7 +148,8 @@ export default class PrimaryContactPanel extends React.Component{
               <input type = "text"
                 value = {this.props.data.lastName.value}
                 className = {this.props.data.lastName.border}
-                id = "txtP_Last"
+                disabled = {this.state.isDisabled}
+                id = "txtB_Last"
                 onChange = {this.updateData}/>
             </div>
           </div>
@@ -125,7 +161,8 @@ export default class PrimaryContactPanel extends React.Component{
               <input type = "text"
                 value = {this.props.data.affiliation.value}
                 className = {this.props.data.affiliation.border}
-                id = "txtP_Affiliation"
+                disabled = {this.state.isDisabled}
+                id = "txtB_Affiliation"
                 onChange = {this.updateData}/>
             </div>
           </div>
@@ -137,7 +174,8 @@ export default class PrimaryContactPanel extends React.Component{
               <input type = "email"
                 value = {this.props.data.email.value}
                 className = {this.props.data.email.border}
-                id = "txtP_Email"
+                disabled = {this.state.isDisabled}
+                id = "txtB_Email"
                 onChange = {this.updateData}/>
             </div>
           </div>
@@ -146,9 +184,10 @@ export default class PrimaryContactPanel extends React.Component{
               <span>*</span> Phone
             </div>
             <div className = {S.input}>
-              <InputMask id = "txtP_Phone"
+              <InputMask id = "txtB_Phone"
                 value = {this.props.data.phoneMask}
                 className = {this.props.data.phone.border}
+                disabled = {this.state.isDisabled}
                 mask = "+1 999-999-9999"
                 maskChar = "_"
                 onChange = {this.updateData}/>
@@ -159,8 +198,9 @@ export default class PrimaryContactPanel extends React.Component{
               <span className = "blank">*</span> Mobile
             </div>
             <div className = {S.input}>
-              <InputMask id = "txtP_Mobile"
+              <InputMask id = "txtB_Mobile"
                 value = {this.props.data.mobileMask}
+                disabled = {this.state.isDisabled}
                 mask = "+1 999-999-9999"
                 maskChar = "_"
                 onChange = {this.updateData}/>
@@ -176,7 +216,8 @@ export default class PrimaryContactPanel extends React.Component{
               <input type = "text"
                 value = {this.props.data.address1.value}
                 className = {this.props.data.address1.border}
-                id = "txtP_Address1"
+                disabled = {this.state.isDisabled}
+                id = "txtB_Address1"
                 onChange = {this.updateData}/>
             </div>
           </div>
@@ -187,7 +228,8 @@ export default class PrimaryContactPanel extends React.Component{
             <div className = {S.input}>
               <input type = "text"
                 value = {this.props.data.address2}
-                id = "txtP_Address2"
+                disabled = {this.state.isDisabled}
+                id = "txtB_Address2"
                 onChange = {this.updateData}/>
             </div>
           </div>
@@ -199,7 +241,8 @@ export default class PrimaryContactPanel extends React.Component{
               <input type = "text"
                 value = {this.props.data.city.value}
                 className = {this.props.data.city.border}
-                id = "txtP_City"
+                disabled = {this.state.isDisabled}
+                id = "txtB_City"
                 onChange = {this.updateData}/>
             </div>
           </div>
@@ -210,7 +253,8 @@ export default class PrimaryContactPanel extends React.Component{
             <div className = {S.input}>
               <StateSelect getIndex = {this.updateData}
                 border = {this.props.data.state.border}
-                index = {this.props.data.state.value}/>
+                index = {this.props.data.state.value}
+                isDisabled = {this.state.isDisabled}/>
             </div>
           </div>
           <div className = {S.item}>
@@ -218,9 +262,10 @@ export default class PrimaryContactPanel extends React.Component{
               <span>*</span> Zip
             </div>
             <div className = {S.input}>
-              <InputMask id = "txtP_Zip"
+              <InputMask id = "txtB_Zip"
                 value = {this.props.data.zip.value}
                 className = {this.props.data.zip.border}
+                disabled = {this.state.isDisabled}
                 mask = "99999"
                 maskChar = "-"
                 onChange = {this.updateData}/>

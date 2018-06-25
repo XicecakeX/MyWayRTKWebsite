@@ -1,10 +1,10 @@
 import React from 'react';
-import S from '../resources/css/addCustomer.module.css';
+import S from './index.module.css';
 import InputMask from 'react-input-mask';
-import StateSelect from '../resources/utilityComponents/stateSelect';
-import F from './functions';
+import StateSelect from '../../resources/utilityComponents/stateSelect';
+import F from '../functions';
 var data = {
-  dataID: "billing",
+  dataID: "primary",
   firstName: {value: "", border: ""},
   lastName: {value: "", border: ""},
   affiliation: {value: "", border: ""},
@@ -20,15 +20,7 @@ var data = {
   zip: {value: "", border: ""}
 };
 
-export default class BillingContactPanel extends React.Component{
-  /**Default Constructor*/
-  constructor(){
-    super();
-    this.state = {
-      isDisabled: false
-    };
-  }
-
+export default class PrimaryContactPanel extends React.Component{
   /**updateData Function*/
   updateData = (event) => {
     //Declaring fields
@@ -36,21 +28,21 @@ export default class BillingContactPanel extends React.Component{
     var val = event.target.value;
     var properties = F.filterProps(Object.getOwnPropertyNames(data), F.countProps(data), 2);
     var checkObj = {dataObj: data, data: this.props.data, target: "", props: properties, val: event.target.value};
-
+    
     //Checking field
-    if(field === "txtB_First"){
+    if(field === "txtP_First"){
       //Setting target
       checkObj.target = "firstName";
-    }else if(field === "txtB_Last"){
+    }else if(field === "txtP_Last"){
       //Setting target
       checkObj.target = "lastName";
-    }else if(field === "txtB_Affiliation"){
+    }else if(field === "txtP_Affiliation"){
       //Setting target
       checkObj.target = "affiliation";
-    }else if(field === "txtB_Email"){
+    }else if(field === "txtP_Email"){
       //Setting target
       checkObj.target = "email";
-    }else if(field === "txtB_Phone"){
+    }else if(field === "txtP_Phone"){
       //Parsing string
       var phone = val.replace(/[\s+-]/g,'');
 
@@ -61,20 +53,20 @@ export default class BillingContactPanel extends React.Component{
 
       //Setting target
       checkObj.target = "phone";
-    }else if(field === "txtB_Mobile"){
+    }else if(field === "txtP_Mobile"){
       //Parsing string
       var mobile = val.replace(/[\s+-]/g,'');
 
       //Setting data
       data.mobile = mobile;
       data.mobileMask = val;
-    }else if(field === "txtB_Address1"){
+    }else if(field === "txtP_Address1"){
       //Setting target
       checkObj.target = "address1";
-    }else if(field === "txtB_Address2"){
+    }else if(field === "txtP_Address2"){
       //Setting data
       data.address2 = val;
-    }else if(field === "txtB_City"){
+    }else if(field === "txtP_City"){
       //Setting target
       checkObj.target = "city";
     }else if(field === "selState"){
@@ -86,7 +78,7 @@ export default class BillingContactPanel extends React.Component{
     }
 
     //Checking field
-    if(field !== "txtB_Mobile" && field !== "txtB_Address2"){
+    if(field !== "txtP_Mobile" && field !== "txtP_Address2"){
       //Calling checkField function
       data = F.checkField(checkObj);
     }
@@ -95,37 +87,11 @@ export default class BillingContactPanel extends React.Component{
     this.props.getData(data);
   }
 
-  /**updateCheck Function*/
-  updateCheck = (event) => {
-    //Checking checkbox
-    if(event.target.checked === true){
-      //Updating data
-      this.props.billingSame(true);
-
-      //Setting state
-      this.setState({isDisabled: true});
-    }else{
-      //Updating data
-      this.props.billingSame(false);
-
-      //Setting state
-      this.setState({isDisabled: false});
-    }
-  }
-
-  test = () => {
-    //console.log(this.props.data);
-  }
-
   /**Rendering Webpage*/
   render(){
     return(
       <fieldset>
-        {this.test()}
-        <legend> Billing Contact</legend>
-        <div className = {S.check}>
-          <input type = "checkbox" onChange = {this.updateCheck}/> Billing same as primary
-        </div>
+        <legend> Primary Contact</legend>
         <div className = {S.column}>
           <div className = {S.item}>
             <div className = {S.title}>
@@ -135,8 +101,7 @@ export default class BillingContactPanel extends React.Component{
               <input type = "text"
                 value = {this.props.data.firstName.value}
                 className = {this.props.data.firstName.border}
-                disabled = {this.state.isDisabled}
-                id = "txtB_First"
+                id = "txtP_First"
                 onChange = {this.updateData}/>
             </div>
           </div>
@@ -148,8 +113,7 @@ export default class BillingContactPanel extends React.Component{
               <input type = "text"
                 value = {this.props.data.lastName.value}
                 className = {this.props.data.lastName.border}
-                disabled = {this.state.isDisabled}
-                id = "txtB_Last"
+                id = "txtP_Last"
                 onChange = {this.updateData}/>
             </div>
           </div>
@@ -161,8 +125,7 @@ export default class BillingContactPanel extends React.Component{
               <input type = "text"
                 value = {this.props.data.affiliation.value}
                 className = {this.props.data.affiliation.border}
-                disabled = {this.state.isDisabled}
-                id = "txtB_Affiliation"
+                id = "txtP_Affiliation"
                 onChange = {this.updateData}/>
             </div>
           </div>
@@ -174,8 +137,7 @@ export default class BillingContactPanel extends React.Component{
               <input type = "email"
                 value = {this.props.data.email.value}
                 className = {this.props.data.email.border}
-                disabled = {this.state.isDisabled}
-                id = "txtB_Email"
+                id = "txtP_Email"
                 onChange = {this.updateData}/>
             </div>
           </div>
@@ -184,10 +146,9 @@ export default class BillingContactPanel extends React.Component{
               <span>*</span> Phone
             </div>
             <div className = {S.input}>
-              <InputMask id = "txtB_Phone"
+              <InputMask id = "txtP_Phone"
                 value = {this.props.data.phoneMask}
                 className = {this.props.data.phone.border}
-                disabled = {this.state.isDisabled}
                 mask = "+1 999-999-9999"
                 maskChar = "_"
                 onChange = {this.updateData}/>
@@ -198,9 +159,8 @@ export default class BillingContactPanel extends React.Component{
               <span className = "blank">*</span> Mobile
             </div>
             <div className = {S.input}>
-              <InputMask id = "txtB_Mobile"
+              <InputMask id = "txtP_Mobile"
                 value = {this.props.data.mobileMask}
-                disabled = {this.state.isDisabled}
                 mask = "+1 999-999-9999"
                 maskChar = "_"
                 onChange = {this.updateData}/>
@@ -216,8 +176,7 @@ export default class BillingContactPanel extends React.Component{
               <input type = "text"
                 value = {this.props.data.address1.value}
                 className = {this.props.data.address1.border}
-                disabled = {this.state.isDisabled}
-                id = "txtB_Address1"
+                id = "txtP_Address1"
                 onChange = {this.updateData}/>
             </div>
           </div>
@@ -228,8 +187,7 @@ export default class BillingContactPanel extends React.Component{
             <div className = {S.input}>
               <input type = "text"
                 value = {this.props.data.address2}
-                disabled = {this.state.isDisabled}
-                id = "txtB_Address2"
+                id = "txtP_Address2"
                 onChange = {this.updateData}/>
             </div>
           </div>
@@ -241,8 +199,7 @@ export default class BillingContactPanel extends React.Component{
               <input type = "text"
                 value = {this.props.data.city.value}
                 className = {this.props.data.city.border}
-                disabled = {this.state.isDisabled}
-                id = "txtB_City"
+                id = "txtP_City"
                 onChange = {this.updateData}/>
             </div>
           </div>
@@ -253,8 +210,7 @@ export default class BillingContactPanel extends React.Component{
             <div className = {S.input}>
               <StateSelect getIndex = {this.updateData}
                 border = {this.props.data.state.border}
-                index = {this.props.data.state.value}
-                isDisabled = {this.state.isDisabled}/>
+                index = {this.props.data.state.value}/>
             </div>
           </div>
           <div className = {S.item}>
@@ -262,10 +218,9 @@ export default class BillingContactPanel extends React.Component{
               <span>*</span> Zip
             </div>
             <div className = {S.input}>
-              <InputMask id = "txtB_Zip"
+              <InputMask id = "txtP_Zip"
                 value = {this.props.data.zip.value}
                 className = {this.props.data.zip.border}
-                disabled = {this.state.isDisabled}
                 mask = "99999"
                 maskChar = "-"
                 onChange = {this.updateData}/>

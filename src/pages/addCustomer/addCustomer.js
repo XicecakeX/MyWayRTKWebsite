@@ -1,7 +1,7 @@
 import React from 'react';
-import LoginPanel from './loginInformationPanel';
-import PrimaryPanel from './primaryContactPanel';
-import BillingPanel from './billingContactPanel';
+import LoginPanel from './LoginInformationPanel';
+import PrimaryPanel from './PrimaryContactPanel';
+import BillingPanel from './BillingContactPanel';
 import dataArray from './dataArray';
 import F from './functions';
 
@@ -39,7 +39,6 @@ export default class AddCustomer extends React.Component{
 
   /**update Function*/
   update = (data) => {
-
     //Checking ID
     if(data.dataID === "login"){
       //Updating array

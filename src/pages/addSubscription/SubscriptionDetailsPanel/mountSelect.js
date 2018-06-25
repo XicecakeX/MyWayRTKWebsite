@@ -4,7 +4,11 @@ export default class MountPointsSelect extends React.Component{
   /**Rendering Webpage*/
   render(){
     return(
-      <select id = "selMount" multiple = "multiple" className = "mount" onChange = {this.props.getValue}>
+      <select id = "selMount"
+        value = {this.props.value}
+        className = {this.props.border}
+        onChange = {this.props.getValue}>
+        <option disabled hidden> NONE</option>
 				<option value = "AR_EUDORA"> AR_EUDORA</option>
         <option value = "AR_HOXIE"> AR_HOXIE</option>
         <option value = "CANADA_MEDORA"> CANADA_MEDORA</option>

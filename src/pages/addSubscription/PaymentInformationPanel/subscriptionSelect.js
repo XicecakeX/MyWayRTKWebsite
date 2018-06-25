@@ -1,5 +1,4 @@
 import React from 'react';
-import S from '../resources/css/addSubscription.module.css';
 
 export default class SubscriptionItemSelect extends React.Component{
   /**checkCredit Function*/
@@ -38,7 +37,10 @@ export default class SubscriptionItemSelect extends React.Component{
   /**Rendering Component*/
   render(){
     return(
-      <select id = "selSubscriptionItem" className = {S.field} defaultValue = "NONE" onChange = {this.props.getValue}>
+      <select id = "selSubscriptionItem"
+        value = {this.props.value}
+        className = {this.props.border}
+        onChange = {this.props.getValue}>
         <option disabled hidden> NONE</option>
         {this.checkCredit()}
       </select>

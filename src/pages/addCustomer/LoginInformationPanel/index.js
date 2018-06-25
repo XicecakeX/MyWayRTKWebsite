@@ -1,5 +1,5 @@
 import React from 'react';
-import S from '../resources/css/addCustomer.module.css';
+import S from './index.module.css';
 var data = {
   dataID: "login",
   username: {value: "", border: ""},

@@ -15,16 +15,12 @@
   padding-bottom: 5px;
 }
 
-.startDate{
-  height: 15px
+[id = selSubscriptionItem], [id = selPaymentType]{
+  width: 275px;
 }
 
 .field{
   width: 265px;
-}
-
-select.field{
-  width: 275px;
 }
 
 .creditField{
@@ -32,9 +28,10 @@ select.field{
   margin-bottom: 0;
 }
 
-textarea{
-  width: 269px;
-  height: 80px;
-  font-family: Arial;
-  resize: none;
+.defaultSelectBorder{
+  border-color: #A9A9A9;
+}
+
+.selectErrorBorder{
+  border-color: red;
 }
