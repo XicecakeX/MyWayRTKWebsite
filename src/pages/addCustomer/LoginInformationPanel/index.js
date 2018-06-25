@@ -1,32 +1,31 @@
 import React from 'react';
 import S from './index.module.css';
-var data = {
-  dataID: "login",
-  username: {value: "", border: ""},
-  password: {value: "", border: ""}
-};
+import TextInput from '../Components/textInput';
 
 export default class LoginInformationPanel extends React.Component{
+  /**Default Constructor*/
+  constructor(){
+    super();
+    this.state = {
+      username: "",
+      password: ""
+    };
+  }
+
   /**updateData Function*/
   updateData = (event) => {
     //Declaring fields
     var field = event.target.id;
     var val = event.target.value;
-    var d = this.props.data;
 
     //Checking field
     if(field === "txtUsername"){
-      //Setting data
-      data.username = {value: val, border: "defaultBorder"};
-      data.password = {value: d.password.value, border: d.password.border};
+      //Setting state
+      this.setState({username: val});
     }else{
-      //Setting data
-      data.username = {value: d.username.value, border: d.username.border};
-      data.password = {value: val, border: "defaultBorder"};
+      //Setting state
+      this.setState({password: val});
     }
-
-    //Updating data object
-    this.props.getData(data);
   }
 
   /**Rendering Webpage*/
@@ -40,9 +39,7 @@ export default class LoginInformationPanel extends React.Component{
               <span>*</span> Username
             </div>
             <div className = {S.input}>
-              <input type = "text"
-                value = {this.props.data.username.value}
-                className = {this.props.data.username.border}
+              <TextInput value = {this.state.username}
                 id = "txtUsername"
                 onChange = {this.updateData}/>
             </div>
@@ -54,9 +51,7 @@ export default class LoginInformationPanel extends React.Component{
               <span>*</span> Password
             </div>
             <div className = {S.input}>
-              <input type = "password"
-                value = {this.props.data.password.value}
-                className = {this.props.data.password.border}
+              <TextInput value = {this.state.password}
                 id = "txtPassword"
                 onChange = {this.updateData}/>
             </div>
