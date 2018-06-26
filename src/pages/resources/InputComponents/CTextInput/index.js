@@ -1,4 +1,6 @@
 import React from 'react';
+import S from './index.module.css';
+import ClassNames from 'classnames';
 
 export default class TextInput extends React.Component{
   /**Rendering Component*/
@@ -6,9 +8,9 @@ export default class TextInput extends React.Component{
     return(
       <input type = "text"
         value = {this.props.value}
-        className = {this.props.className}
+        className = {ClassNames(this.props.style, S.textField)}
         id = {this.props.id}
-        onChange = {this.props.onChange}/>
+        onChange = {(event) => {this.props.setInput(event.target.value)}}/>
     );
   }
 }

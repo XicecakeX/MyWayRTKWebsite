@@ -1,274 +1,151 @@
 import React from 'react';
 import S from './index.module.css';
-import InputMask from 'react-input-mask';
-import StateSelect from '../../resources/utilityComponents/stateSelect';
-import F from '../functions';
-var data = {
-  dataID: "billing",
-  firstName: {value: "", border: ""},
-  lastName: {value: "", border: ""},
-  affiliation: {value: "", border: ""},
-  email: {value: "", border: ""},
-  phone: {value: "", border: ""},
-  phoneMask: "",
-  mobile: "",
-  mobileMask: "",
-  address1: {value: "", border: ""},
-  address2: "",
-  city: {value: "", border: ""},
-  state: {value: "NONE", border: ""},
-  zip: {value: "", border: ""}
-};
+import CheckBoxInput from '../../Resources/InputComponents/CheckBoxInput';
+import TextInput from '../../Resources/InputComponents/CTextInput';
+import PhoneInput from '../../Resources/InputComponents/PhoneInput';
+import StateInput from '../../Resources/InputComponents/StateInput';
+import ZipInput from '../../Resources/InputComponents/ZipInput';
 
 export default class BillingContactPanel extends React.Component{
   /**Default Constructor*/
   constructor(){
     super();
     this.state = {
-      isDisabled: false
+      checked: false,
+      firstName: "",
+      lastName: "",
+      affiliation: "",
+      email: "",
+      phone: {value: "", mask: ""},
+      mobile: {value: "", mask: ""},
+      address1: "",
+      address2: "",
+      city: "",
+      state: "NONE",
+      zip: ""
     };
-  }
-
-  /**updateData Function*/
-  updateData = (event) => {
-    //Declaring fields
-    var field = event.target.id;
-    var val = event.target.value;
-    var properties = F.filterProps(Object.getOwnPropertyNames(data), F.countProps(data), 2);
-    var checkObj = {dataObj: data, data: this.props.data, target: "", props: properties, val: event.target.value};
-
-    //Checking field
-    if(field === "txtB_First"){
-      //Setting target
-      checkObj.target = "firstName";
-    }else if(field === "txtB_Last"){
-      //Setting target
-      checkObj.target = "lastName";
-    }else if(field === "txtB_Affiliation"){
-      //Setting target
-      checkObj.target = "affiliation";
-    }else if(field === "txtB_Email"){
-      //Setting target
-      checkObj.target = "email";
-    }else if(field === "txtB_Phone"){
-      //Parsing string
-      var phone = val.replace(/[\s+-]/g,'');
-
-      //Setting data
-      data.phoneMask = val;
-      checkObj.val = phone;
-      checkObj.dataObj = data;
-
-      //Setting target
-      checkObj.target = "phone";
-    }else if(field === "txtB_Mobile"){
-      //Parsing string
-      var mobile = val.replace(/[\s+-]/g,'');
-
-      //Setting data
-      data.mobile = mobile;
-      data.mobileMask = val;
-    }else if(field === "txtB_Address1"){
-      //Setting target
-      checkObj.target = "address1";
-    }else if(field === "txtB_Address2"){
-      //Setting data
-      data.address2 = val;
-    }else if(field === "txtB_City"){
-      //Setting target
-      checkObj.target = "city";
-    }else if(field === "selState"){
-      //Setting target
-      checkObj.target = "state";
-    }else{
-      //Setting target
-      checkObj.target = "zip";
-    }
-
-    //Checking field
-    if(field !== "txtB_Mobile" && field !== "txtB_Address2"){
-      //Calling checkField function
-      data = F.checkField(checkObj);
-    }
-
-    //Updating data object
-    this.props.getData(data);
-  }
-
-  /**updateCheck Function*/
-  updateCheck = (event) => {
-    //Checking checkbox
-    if(event.target.checked === true){
-      //Updating data
-      this.props.billingSame(true);
-
-      //Setting state
-      this.setState({isDisabled: true});
-    }else{
-      //Updating data
-      this.props.billingSame(false);
-
-      //Setting state
-      this.setState({isDisabled: false});
-    }
-  }
-
-  test = () => {
-    //console.log(this.props.data);
   }
 
   /**Rendering Webpage*/
   render(){
     return(
-      <fieldset>
-        {this.test()}
-        <legend> Billing Contact</legend>
+      <fieldset className = {S.fieldset}>
+        <legend className = {S.legend}> Billing Contact</legend>
         <div className = {S.check}>
-          <input type = "checkbox" onChange = {this.updateCheck}/> Billing same as primary
+          <CheckBoxInput checked = {this.state.checked}
+            setInput = {(value) => {this.setState({checked: value})}}/> Billing same as primary
         </div>
         <div className = {S.column}>
           <div className = {S.item}>
             <div className = {S.title}>
-              <span>*</span> First Name
+              <span className = {S.req}>*</span> First Name
             </div>
             <div className = {S.input}>
-              <input type = "text"
-                value = {this.props.data.firstName.value}
-                className = {this.props.data.firstName.border}
-                disabled = {this.state.isDisabled}
-                id = "txtB_First"
-                onChange = {this.updateData}/>
+              <TextInput value = {this.state.firstName}
+                id = "txtFirstName"
+                setInput = {(value) => {this.setState({firstName: value})}}/>
             </div>
           </div>
           <div className = {S.item}>
             <div className = {S.title}>
-              <span>*</span> Last Name
+              <span className = {S.req}>*</span> Last Name
             </div>
             <div className = {S.input}>
-              <input type = "text"
-                value = {this.props.data.lastName.value}
-                className = {this.props.data.lastName.border}
-                disabled = {this.state.isDisabled}
-                id = "txtB_Last"
-                onChange = {this.updateData}/>
+              <TextInput value = {this.state.lastName}
+                id = "txtLastName"
+                setInput = {(value) => {this.setState({lastName: value})}}/>
             </div>
           </div>
           <div className = {S.item}>
             <div className = {S.title}>
-              <span>*</span> Affiliation
+              <span className = {S.req}>*</span> Affiliation
             </div>
             <div className = {S.input}>
-              <input type = "text"
-                value = {this.props.data.affiliation.value}
-                className = {this.props.data.affiliation.border}
-                disabled = {this.state.isDisabled}
-                id = "txtB_Affiliation"
-                onChange = {this.updateData}/>
+              <TextInput value = {this.state.affiliation}
+                id = "txtAffiliation"
+                setInput = {(value) => {this.setState({affiliation: value})}}/>
             </div>
           </div>
           <div className = {S.item}>
             <div className = {S.title}>
-              <span>*</span> Email
+              <span className = {S.req}>*</span> Email
             </div>
             <div className = {S.input}>
-              <input type = "email"
-                value = {this.props.data.email.value}
-                className = {this.props.data.email.border}
-                disabled = {this.state.isDisabled}
-                id = "txtB_Email"
-                onChange = {this.updateData}/>
+              <TextInput value = {this.state.email}
+                id = "txtEmail"
+                setInput = {(value) => {this.setState({email: value})}}/>
             </div>
           </div>
           <div className = {S.item}>
             <div className = {S.title}>
-              <span>*</span> Phone
+              <span className = {S.req}>*</span> Phone
             </div>
             <div className = {S.input}>
-              <InputMask id = "txtB_Phone"
-                value = {this.props.data.phoneMask}
-                className = {this.props.data.phone.border}
-                disabled = {this.state.isDisabled}
-                mask = "+1 999-999-9999"
-                maskChar = "_"
-                onChange = {this.updateData}/>
+              <PhoneInput value = {this.state.phone.mask}
+                id = "txtPhone"
+                setInput = {(data) => {this.setState({phone: {value: data.value, mask: data.mask}})}}/>
             </div>
           </div>
           <div className = {S.item}>
             <div className = {S.title}>
-              <span className = "blank">*</span> Mobile
+              <span className = {S.blank}>*</span> Mobile
             </div>
             <div className = {S.input}>
-              <InputMask id = "txtB_Mobile"
-                value = {this.props.data.mobileMask}
-                disabled = {this.state.isDisabled}
-                mask = "+1 999-999-9999"
-                maskChar = "_"
-                onChange = {this.updateData}/>
+              <PhoneInput value = {this.state.mobile.mask}
+                id = "txtMobile"
+                setInput = {(data) => {this.setState({mobile: {value: data.value, mask: data.mask}})}}/>
             </div>
           </div>
         </div>
         <div className = {S.column}>
           <div className = {S.item}>
             <div className = {S.title}>
-              <span>*</span> Address 1
+              <span className = {S.req}>*</span> Address 1
             </div>
             <div className = {S.input}>
-              <input type = "text"
-                value = {this.props.data.address1.value}
-                className = {this.props.data.address1.border}
-                disabled = {this.state.isDisabled}
-                id = "txtB_Address1"
-                onChange = {this.updateData}/>
+              <TextInput value = {this.state.address1}
+                id = "txtAddress1"
+                setInput = {(value) => {this.setState({address1: value})}}/>
             </div>
           </div>
           <div className = {S.item}>
             <div className = {S.title}>
-              <span className = "blank">*</span> Address 2
+              <span className = {S.blank}>*</span> Address 2
             </div>
             <div className = {S.input}>
-              <input type = "text"
-                value = {this.props.data.address2}
-                disabled = {this.state.isDisabled}
-                id = "txtB_Address2"
-                onChange = {this.updateData}/>
+              <TextInput value = {this.state.address2}
+                id = "txtAddress2"
+                setInput = {(value) => {this.setState({address2: value})}}/>
             </div>
           </div>
           <div className = {S.item}>
             <div className = {S.title}>
-              <span>*</span> City
+              <span className = {S.req}>*</span> City
             </div>
             <div className = {S.input}>
-              <input type = "text"
-                value = {this.props.data.city.value}
-                className = {this.props.data.city.border}
-                disabled = {this.state.isDisabled}
-                id = "txtB_City"
-                onChange = {this.updateData}/>
+              <TextInput value = {this.state.city}
+                id = "txtCity"
+                setInput = {(value) => {this.setState({city: value})}}/>
             </div>
           </div>
           <div className = {S.item}>
             <div className = {S.title}>
-              <span>*</span> State
+              <span className = {S.req}>*</span> State
             </div>
             <div className = {S.input}>
-              <StateSelect getIndex = {this.updateData}
-                border = {this.props.data.state.border}
-                index = {this.props.data.state.value}
-                isDisabled = {this.state.isDisabled}/>
+              <StateInput value = {this.state.state}
+                id = "selState"
+                setInput = {(value) => {this.setState({state: value})}}/>
             </div>
           </div>
           <div className = {S.item}>
             <div className = {S.title}>
-              <span>*</span> Zip
+              <span className = {S.req}>*</span> Zip
             </div>
             <div className = {S.input}>
-              <InputMask id = "txtB_Zip"
-                value = {this.props.data.zip.value}
-                className = {this.props.data.zip.border}
-                disabled = {this.state.isDisabled}
-                mask = "99999"
-                maskChar = "-"
-                onChange = {this.updateData}/>
+              <ZipInput value = {this.state.zip}
+                id = "txtZip"
+                setInput = {(value) => {this.setState({zip: value})}}/>
             </div>
           </div>
         </div>

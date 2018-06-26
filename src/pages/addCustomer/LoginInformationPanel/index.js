@@ -1,6 +1,6 @@
 import React from 'react';
 import S from './index.module.css';
-import TextInput from '../Components/textInput';
+import TextInput from '../../Resources/InputComponents/CTextInput';
 
 export default class LoginInformationPanel extends React.Component{
   /**Default Constructor*/
@@ -12,48 +12,32 @@ export default class LoginInformationPanel extends React.Component{
     };
   }
 
-  /**updateData Function*/
-  updateData = (event) => {
-    //Declaring fields
-    var field = event.target.id;
-    var val = event.target.value;
-
-    //Checking field
-    if(field === "txtUsername"){
-      //Setting state
-      this.setState({username: val});
-    }else{
-      //Setting state
-      this.setState({password: val});
-    }
-  }
-
-  /**Rendering Webpage*/
+  /**Rendering Component*/
   render(){
     return(
-      <fieldset>
-        <legend> Login Information</legend>
+      <fieldset className = {S.fieldset}>
+        <legend className = {S.legend}> Login Information</legend>
         <div className = {S.column}>
           <div className = {S.item}>
             <div className = {S.title}>
-              <span>*</span> Username
+              <span className = {S.req}>*</span> Username
             </div>
             <div className = {S.input}>
               <TextInput value = {this.state.username}
                 id = "txtUsername"
-                onChange = {this.updateData}/>
+                setInput = {(value) => {this.setState({username: value})}}/>
             </div>
           </div>
         </div>
         <div className = {S.column}>
           <div className = {S.item}>
             <div className = {S.title}>
-              <span>*</span> Password
+              <span className = {S.req}>*</span> Password
             </div>
             <div className = {S.input}>
               <TextInput value = {this.state.password}
                 id = "txtPassword"
-                onChange = {this.updateData}/>
+                setInput = {(value) => {this.setState({password: value})}}/>
             </div>
           </div>
         </div>

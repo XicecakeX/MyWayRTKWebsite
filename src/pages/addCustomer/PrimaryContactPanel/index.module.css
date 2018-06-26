@@ -19,3 +19,23 @@
   float: left;
   padding-bottom: 5px;
 }
+
+.fieldset{
+  border: 2px solid #00334D;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.legend{
+  color: #00334D;
+  font-weight: bold;
+}
+
+.req{
+  color: red;
+  font-weight: bold;
+}
+
+.blank{
+  opacity: 0;
+}

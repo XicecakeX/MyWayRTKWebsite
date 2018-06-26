@@ -1,5 +1,5 @@
 import React from 'react';
-import S from '../resources/css/myAccount.module.css';
+import S from '../Resources/css/myAccount.module.css';
 
 export default class MyWayRTKInformationPanel extends React.Component{
   /**Rendering Component*/

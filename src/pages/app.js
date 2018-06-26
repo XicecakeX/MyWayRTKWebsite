@@ -1,9 +1,9 @@
 import React from 'react';
-import MyAccount from './myAccount/myAccount';
-import AddCustomer from './addCustomer/addCustomer';
-import AddSubscription from './addSubscription/addSubscription';
-import SideNavigation from './resources/utilityComponents/sideNavigationBar';
-import './resources/css/styles.css';
+import MyAccount from './MyAccount/myAccount';
+import AddCustomer from './AddCustomer';
+import AddSubscription from './AddSubscription/addSubscription';
+import SideNavigation from './Resources/utilityComponents/sideNavigationBar';
+import './Resources/css/styles.css';
 
 export default class App extends React.Component{
   /**Default Constructor*/
@@ -53,7 +53,7 @@ export default class App extends React.Component{
     return(
       <div>
         <div className = "background">
-          <img src = {require('./resources/images/background.png')} alt = "background"/>
+          <img src = {require('./Resources/images/background.png')} alt = "background"/>
         </div>
         <div className = "content">
           <SideNavigation page = {this.state.page}/>

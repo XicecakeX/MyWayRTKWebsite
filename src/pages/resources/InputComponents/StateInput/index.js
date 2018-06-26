@@ -1,14 +1,15 @@
 import React from 'react';
+import S from './index.module.css';
+import ClassNames from 'classnames';
 
-export default class StateSelect extends React.Component{
+export default class StateInput extends React.Component{
   /**Rendering Webpage*/
   render(){
     return(
-      <select id = "selState"
-        value = {this.props.index}
-        className = {this.props.border}
-        disabled = {this.props.isDisabled}
-        onChange = {this.props.getIndex}>
+      <select value = {this.props.value}
+        className = {ClassNames(this.props.style, S.selectField)}
+        id = {this.props.id}
+        onChange = {(event) => {this.props.setInput(event.target.value)}}>
 				<option disabled hidden> NONE</option>
         <option value = "AL"> AL</option>
         <option value = "AK"> AK</option>
