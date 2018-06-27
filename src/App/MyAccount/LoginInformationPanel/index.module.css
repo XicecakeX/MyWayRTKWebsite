@@ -1,0 +1,35 @@
+.item{
+  float: left;
+  width: 100%;
+  padding: 3px;
+}
+
+.title{
+  float: left;
+  color: grey;
+  width: 150px;
+  padding: 5px;
+}
+
+.data{
+  float: left;
+  width: 482px;
+  padding: 5px;
+}
+
+.fieldset{
+  border: 2px solid #00334D;
+  margin-bottom: 20px;
+  padding: 0 20px 20px 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.fieldset legend{
+  color: #00334D;
+  font-weight: bold;
+}
+
+.button{
+  text-align: right;
+  width: 100%;
+}

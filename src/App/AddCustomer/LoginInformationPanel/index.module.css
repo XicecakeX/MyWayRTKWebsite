@@ -1,0 +1,38 @@
+.column{
+  float: left;
+  width: 326px;
+}
+
+.item{
+  float: left;
+  width: 100%;
+  padding: 3px;
+}
+
+.title{
+  float: left;
+  width: 100px;
+  padding: 5px;
+}
+
+.input{
+  float: left;
+  padding-bottom: 5px;
+}
+
+.fieldset{
+  border: 2px solid #00334D;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.fieldset legend{
+  color: #00334D;
+  font-weight: bold;
+}
+
+.fieldset span{
+  color: red;
+  font-weight: bold;
+}

@@ -1,0 +1,11 @@
+.button{
+  height: 30px;
+  text-align: center;
+  width: 140px;
+}
+
+.button:hover{
+  cursor: pointer;
+  color: #00334D;
+  background-color: #F78F1E;
+}

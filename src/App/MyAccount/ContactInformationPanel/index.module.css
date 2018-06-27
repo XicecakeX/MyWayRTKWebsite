@@ -1,0 +1,39 @@
+.item{
+  float: left;
+  width: 100%;
+  padding: 3px;
+}
+
+.fieldset{
+  border: 2px solid #00334D;
+  margin-bottom: 20px;
+  padding: 0 20px 20px 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.fieldset legend{
+  color: #00334D;
+  font-weight: bold;
+}
+
+.button{
+  text-align: right;
+  width: 100%;
+}
+
+.table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.table td, th{
+  padding: 5px;
+  border: 1px solid black;
+  width: 25%;
+  font-size: 10pt;
+}
+
+.title{
+  color: grey;
+}

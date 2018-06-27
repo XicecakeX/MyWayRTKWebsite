@@ -1,0 +1,32 @@
+.sideNav{
+  float: left;
+  border-radius: 15px;
+  width: 250px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 60px 15px 60px 15px;
+}
+
+.default{
+  padding: 10px 10px 10px 32px;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+}
+
+.default:hover{
+  font-weight: bold;
+  color: white;
+  background-color: #F78F1E;
+  cursor: pointer;
+}
+
+.selected{
+  padding: 10px 10px 10px 32px;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  font-weight: bold;
+  color: #F78F1E;
+  background-color: #00334D;
+}
